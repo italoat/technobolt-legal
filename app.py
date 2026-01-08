@@ -158,8 +158,9 @@ def call_technobolt_ai(prompt, attachments=None, system_context="default"):
 # --- 5. DESIGN SYSTEM (DARK MODE ABSOLUTO) ---
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
     
+    /* 1. FUNDO GLOBAL PRETO E FONTES BRANCAS */
     html, body, [data-testid="stAppViewContainer"], [data-testid="stHeader"] { 
         background-color: #000000 !important; 
         font-family: 'Inter', sans-serif !important; 
@@ -170,45 +171,65 @@ st.markdown("""
     [data-testid="stSidebar"] { display: none !important; }
     header, footer { visibility: hidden !important; }
 
-    /* TITULO CENTRALIZADO AZUL */
-    .hero-container { text-align: center; width: 100%; margin-top: 20px; margin-bottom: 20px; }
-    .hero-title-blue { 
-        font-size: 50px; font-weight: 800; color: #3b82f6 !important; 
-        text-align: center; display: block; width: 100%;
+    /* 2. BARRA DE SERVIÇOS (SELECTBOX) - REFINAMENTO TOTAL */
+    /* Fundo da caixa fechada */
+    div[data-baseweb="select"] > div {
+        background-color: #1a1a1a !important;
+        border: 1px solid #333333 !important;
+        border-radius: 12px !important;
+        color: #ffffff !important;
     }
 
-    /* REMOÇÃO DE FUNDOS BRANCOS EM INPUTS E SELECTS */
-    div[data-baseweb="select"] > div, 
-    div[data-baseweb="input"] > div, 
-    div[data-baseweb="textarea"] > div,
-    [data-testid="stSelectbox"] div,
-    [data-testid="stTextArea"] div {
+    /* Menu suspenso quando aberto (remover branco) */
+    div[data-baseweb="popover"] > div,
+    div[role="listbox"],
+    ul[role="listbox"] {
         background-color: #1a1a1a !important;
         border: 1px solid #333333 !important;
         color: #ffffff !important;
     }
 
-    div[role="listbox"], li[role="option"], div[data-baseweb="popover"] {
+    /* Itens individuais da lista */
+    li[role="option"] {
         background-color: #1a1a1a !important;
         color: #ffffff !important;
+        transition: 0.2s;
     }
-    li[role="option"]:hover { background-color: #3b82f6 !important; }
 
-    /* FILE UPLOADER DARK */
+    /* Item selecionado ou hover */
+    li[role="option"]:hover, 
+    li[data-baseweb="typeahead-highlighted"] {
+        background-color: #3b82f6 !important;
+        color: #ffffff !important;
+    }
+
+    /* 3. FILE UPLOADER (REMOVER BRANCO E AJUSTAR BOTÃO) */
     [data-testid="stFileUploader"] {
         background-color: #1a1a1a !important;
-        border: 1px dashed #333333 !important;
-        border-radius: 15px;
+        border: 1px dashed #404040 !important;
+        border-radius: 15px !important;
         padding: 10px;
     }
+
+    /* Botão 'Browse files' */
     [data-testid="stFileUploader"] button {
         background-color: #333333 !important;
         color: #ffffff !important;
         border: 1px solid #444444 !important;
-        appearance: none;
+        border-radius: 8px !important;
     }
 
-    /* CARDS PRINCIPAIS */
+    [data-testid="stFileUploader"] button:hover {
+        background-color: #3b82f6 !important;
+        border-color: #ffffff !important;
+    }
+
+    /* Área interna do uploader */
+    [data-testid="stFileUploader"] section {
+        background-color: #1a1a1a !important;
+    }
+
+    /* 4. CARDS E CONTAINERS */
     .main-card {
         background-color: #1a1a1a !important; 
         border: 1px solid #333333; 
@@ -217,16 +238,16 @@ st.markdown("""
         margin-bottom: 25px;
     }
 
-    /* RESULTADO UNIFICADO */
+    /* 5. CARD DE RESULTADO UNIFICADO */
     .result-card-unificado {
-        background: #0a0a0a !important; 
+        background: #0d0d0d !important; 
         border: 1px solid #333333; 
         border-radius: 20px;
         padding: 35px; 
-        margin-top: 20px;
         color: #ffffff !important;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
     }
+
     .result-title {
         color: #3b82f6 !important;
         font-weight: 800;
@@ -236,15 +257,26 @@ st.markdown("""
         padding-bottom: 15px;
     }
 
-    /* BOTÕES */
+    /* 6. BOTÕES GERAIS */
     .stButton > button {
-        width: 100%; border-radius: 12px; height: 3.5em; font-weight: 700;
+        width: 100%; border-radius: 10px; height: 3.5em; font-weight: 700;
         background-color: #1a1a1a !important; color: #ffffff !important; 
-        border: 1px solid #333333 !important;
+        border: 1px solid #333333 !important; transition: 0.3s;
     }
     .stButton > button:hover { background-color: #3b82f6 !important; border-color: #ffffff !important; }
 
-    input, textarea { color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; }
+    /* Ajuste para inputs de texto e área de texto */
+    div[data-baseweb="input"] > div, 
+    div[data-baseweb="textarea"] > div {
+        background-color: #1a1a1a !important;
+        border: 1px solid #333333 !important;
+        color: #ffffff !important;
+    }
+    
+    input, textarea {
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
