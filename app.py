@@ -160,101 +160,128 @@ st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
     
-    /* 1. FUNDO GLOBAL E FONTES */
-    html, body, [data-testid="stAppViewContainer"] { 
-        background-color: #080438 !important; 
+    /* 1. FUNDO GLOBAL PRETO E FONTES BRANCAS */
+    html, body, [data-testid="stAppViewContainer"], [data-testid="stHeader"] { 
+        background-color: #000000 !important; 
         font-family: 'Inter', sans-serif !important; 
         color: #ffffff !important;
     }
 
-    h1, h2, h3, p, label, .stMarkdown { color: #ffffff !important; }
+    /* Forçar cor branca em todos os textos, labels e markdown */
+    h1, h2, h3, h4, p, label, span, div, .stMarkdown { 
+        color: #ffffff !important; 
+    }
+    
     [data-testid="stSidebar"] { display: none !important; }
     header, footer { visibility: hidden !important; }
 
-    /* 2. CARDS PRINCIPAIS */
+    /* 2. CARDS PRINCIPAIS E CONTAINERS EM CINZA ESCURO */
     .main-card {
-        background: rgba(16, 59, 112, 0.1); 
-        border: 1px solid #103b70; 
-        border-radius: 24px;
-        padding: 45px; 
-        margin-bottom: 30px;
+        background-color: #1a1a1a !important; 
+        border: 1px solid #333333; 
+        border-radius: 20px;
+        padding: 40px; 
+        margin-bottom: 25px;
     }
 
-    /* 3. REMOÇÃO DE FUNDOS BRANCOS: SELECTBOX (BARRA SUSPENSA) */
-    div[data-baseweb="select"] > div {
-        background-color: #103b70 !important;
-        border: 1px solid #103b70 !important;
-        color: #ffffff !important;
-    }
-    
-    /* Lista de opções do Selectbox */
-    ul[role="listbox"] {
-        background-color: #080438 !important;
-        border: 1px solid #103b70 !important;
-    }
-    li[role="option"] {
-        color: #ffffff !important;
-        background-color: #080438 !important;
-    }
-    li[role="option"]:hover {
-        background-color: #103b70 !important;
-    }
-
-    /* 4. REMOÇÃO DE FUNDOS BRANCOS: FILE UPLOADER (BOTÕES E ÁREA) */
-    [data-testid="stFileUploader"] {
-        background-color: #103b70 !important;
-        border: 1px dotted #3b82f6 !important;
-        border-radius: 12px !important;
-        padding: 10px;
-    }
-    
-    [data-testid="stFileUploader"] section {
-        background-color: #103b70 !important;
-        color: #ffffff !important;
-    }
-
-    /* Texto dentro do Uploader */
-    [data-testid="stFileUploaderText"] {
-        color: #ffffff !important;
-    }
-
-    /* 5. INPUTS E TEXTAREA */
+    /* 3. WIDGETS (SELECTBOX, INPUTS, TEXTAREA) EM CINZA */
+    div[data-baseweb="select"] > div, 
     div[data-baseweb="input"] > div, 
     div[data-baseweb="textarea"] > div {
-        background-color: #103b70 !important;
-        border: 1px solid #103b70 !important;
-        border-radius: 12px !important;
+        background-color: #262626 !important;
+        border: 1px solid #404040 !important;
+        border-radius: 10px !important;
         color: #ffffff !important;
     }
 
+    /* Cor do texto ao digitar */
     input, textarea {
         color: #ffffff !important;
         -webkit-text-fill-color: #ffffff !important;
     }
 
-    /* 6. CARD DE RESULTADO ESCURO */
+    /* Menu de opções (dropdown) do selectbox */
+    ul[role="listbox"] {
+        background-color: #262626 !important;
+        border: 1px solid #404040 !important;
+    }
+    li[role="option"] {
+        background-color: #262626 !important;
+        color: #ffffff !important;
+    }
+    li[role="option"]:hover {
+        background-color: #404040 !important;
+    }
+
+    /* 4. FILE UPLOADER EM CINZA COM TEXTO BRANCO */
+    [data-testid="stFileUploader"] {
+        background-color: #1a1a1a !important;
+        border: 1px dashed #404040 !important;
+        border-radius: 12px !important;
+        padding: 15px;
+    }
+    
+    /* Remover o fundo azul do botão de upload e ícone */
+    [data-testid="stFileUploader"] section {
+        background-color: #262626 !important;
+        color: #ffffff !important;
+    }
+    
+    /* Ajuste de cor de textos pequenos de ajuda do uploader */
+    small {
+        color: #cccccc !important;
+    }
+
+    /* 5. CARD DE RESULTADO (CINZA MUITO ESCURO) */
     .result-card-dark {
-        background: #04021a !important; 
-        border: 1px solid #103b70; 
-        border-radius: 24px;
-        padding: 40px; 
-        color: #f1f5f9 !important;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        background: #0d0d0d !important; 
+        border: 1px solid #333333; 
+        border-radius: 20px;
+        padding: 35px; 
+        color: #ffffff !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
     }
 
-    .hero-title {
-        font-size: 42px; font-weight: 800; text-align: center;
-        background: linear-gradient(135deg, #ffffff 0%, #3b82f6 100%);
-        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        margin-bottom: 10px;
+    /* Tabelas no resultado */
+    .result-card-dark table { width: 100%; border-collapse: collapse; color: #ffffff; }
+    .result-card-dark th, .result-card-dark td { 
+        border: 1px solid #333333; 
+        padding: 10px; 
+        background: #1a1a1a; 
     }
 
+    /* 6. BOTÕES (CINZA MÉDIO COM HOVER CLARO) */
     .stButton > button {
-        width: 100%; border-radius: 14px; height: 3.8em; font-weight: 700;
-        background: #1e40af !important; color: white !important; border: none !important;
-        transition: 0.4s; text-transform: uppercase;
+        width: 100%; 
+        border-radius: 10px; 
+        height: 3.5em; 
+        font-weight: 700;
+        background-color: #333333 !important; 
+        color: #ffffff !important; 
+        border: 1px solid #404040 !important;
+        transition: 0.3s;
     }
-    .stButton > button:hover { background: #3b82f6 !important; transform: translateY(-2px); }
+    .stButton > button:hover { 
+        background-color: #4d4d4d !important; 
+        border-color: #ffffff !important;
+    }
+
+    /* 7. BADGES DE STATUS */
+    .status-badge {
+        padding: 5px 15px; 
+        border-radius: 50px; 
+        background: #262626; 
+        color: #ffffff; 
+        font-size: 12px; 
+        border: 1px solid #404040;
+    }
+    
+    /* Estilização da linha separadora */
+    hr {
+        border: 0;
+        border-top: 1px solid #333333 !important;
+        margin: 25px 0 !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
