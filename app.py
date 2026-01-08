@@ -168,81 +168,71 @@ Python
 # --- 5. DESIGN SYSTEM (ESTÉTICA TECHNOBOLT LEGAL - DARK UNIFICADO) ---
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
     
-    /* 1. FUNDO GLOBAL E FONTES BRANCAS */
     html, body, [data-testid="stAppViewContainer"] { 
         background-color: #080438 !important; 
         font-family: 'Inter', sans-serif !important; 
         color: #ffffff !important;
     }
 
-    /* Ajuste global de cores para elementos nativos do Streamlit */
-    h1, h2, h3, h4, p, label, .stMarkdown { color: #ffffff !important; }
-    
+    h1, h2, h3, p, label, .stMarkdown { color: #ffffff !important; }
     [data-testid="stSidebar"] { display: none !important; }
     header, footer { visibility: hidden !important; }
 
-    /* 2. CARDS DE ENTRADA (UNIFICADOS COM O FUNDO) */
+    /* CARDS PRINCIPAIS */
     .main-card {
-        background: rgba(16, 59, 112, 0.3); /* Baseado no tom solicitado */
+        background: rgba(16, 59, 112, 0.1); 
         border: 1px solid #103b70; 
         border-radius: 24px;
         padding: 45px; 
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2); 
         margin-bottom: 30px;
     }
 
-    /* 3. BARRAS SUSPENSAS, FORMS E INPUTS (COR #103b70) */
-    /* Selectbox, Inputs de Texto e Text Area */
+    /* FORMS, INPUTS E SELECTS UNIFICADOS EM #103B70 */
     div[data-baseweb="select"] > div, 
     div[data-baseweb="input"] > div, 
     div[data-baseweb="textarea"] > div {
         background-color: #103b70 !important;
-        border: 1px solid #3b82f6 !important;
+        border: 1px solid #103b70 !important;
         border-radius: 12px !important;
         color: #ffffff !important;
     }
 
-    /* Estilização interna da fonte nos campos */
     input, textarea, [data-baseweb="select"] {
         color: #ffffff !important;
-        -webkit-text-fill-color: #ffffff !important; /* Força no Chrome */
+        -webkit-text-fill-color: #ffffff !important;
     }
 
-    /* 4. CARD DE RESULTADO (CONTRASTE PARA LEITURA) */
+    /* CARD DE RESULTADO ESCURO */
     .result-card-dark {
         background: #04021a !important; 
         border: 1px solid #103b70; 
         border-radius: 24px;
         padding: 40px; 
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); 
-        margin-bottom: 30px;
         color: #f1f5f9 !important;
     }
 
-    /* 5. TABELAS INTERNAS NO RESULTADO */
     .result-card-dark table { width: 100%; border-collapse: collapse; margin-top: 20px; color: #ffffff; }
     .result-card-dark th, .result-card-dark td { border: 1px solid #103b70; padding: 12px; text-align: left; background: rgba(16, 59, 112, 0.2); }
 
-    /* 6. TÍTULO HERO E BOTÕES */
     .hero-title {
         font-size: 42px; font-weight: 800; text-align: center;
         background: linear-gradient(135deg, #ffffff 0%, #3b82f6 100%);
         -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        letter-spacing: -2px; margin-bottom: 10px;
+        margin-bottom: 10px;
     }
 
     .stButton > button {
         width: 100%; border-radius: 14px; height: 3.8em; font-weight: 700;
         background: #1e40af !important; color: white !important; border: none !important;
-        text-transform: uppercase; letter-spacing: 1.5px; transition: 0.4s;
+        transition: 0.4s;
     }
     .stButton > button:hover { background: #3b82f6 !important; transform: translateY(-2px); }
 
     .status-badge {
         padding: 6px 18px; border-radius: 50px; background: #103b70; 
-        color: #ffffff; font-size: 12px; font-weight: 700; border: 1px solid #3b82f6;
+        color: #ffffff; font-size: 12px; font-weight: 700; border: 1px solid #103b70;
     }
 </style>
 """, unsafe_allow_html=True)
