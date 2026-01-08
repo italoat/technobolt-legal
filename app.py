@@ -387,28 +387,28 @@ if st.session_state.get('mostrar_resultado'):
     st.markdown("---")
     _, col_res, _ = st.columns([0.1, 11.8, 0.1])
     with col_res:
-        # Criamos o container visual
+        # O container força o Streamlit a agrupar os elementos dentro do card
         with st.container():
-            # Injetamos o CSS de abertura do card e o título
+            # Abertura do card e título
             st.markdown(f"""
                 <div class="result-card-unificado">
                     <div class="result-title">Technobolt - {st.session_state.titulo_resultado}</div>
-                    <div style="color: #ffffff; line-height: 1.6;">
+                    <div style="color: #ffffff; min-height: 50px;">
             """, unsafe_allow_html=True)
             
-            # Renderizamos o conteúdo da IA aqui dentro
+            # Conteúdo da IA renderizado dinamicamente dentro das DIVs
             st.markdown(st.session_state.resultado_ia)
             
-            # Fechamos as tags HTML
+            # Fechamento das DIVs
             st.markdown("""
                     </div>
                 </div>
             """, unsafe_allow_html=True)
         
-        # Botão de fechar fora do card para clareza
+        # Botão de fechar posicionado abaixo do card
         st.write("")
-        if st.button("✖️ FECHAR RELATÓRIO"):
+        if st.button("✖️ LIMPAR E FECHAR RELATÓRIO"):
             st.session_state.mostrar_resultado = False
             st.rerun()
-
+            
 st.caption(f"TechnoBolt Solutions © 2026 | Operador: {st.session_state.user_atual.upper()}")
