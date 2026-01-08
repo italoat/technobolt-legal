@@ -160,7 +160,7 @@ st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
     
-    /* 1. FUNDO GLOBAL PRETO */
+    /* 1. FUNDO GLOBAL PRETO ABSOLUTO */
     html, body, [data-testid="stAppViewContainer"], [data-testid="stHeader"] { 
         background-color: #000000 !important; 
         font-family: 'Inter', sans-serif !important; 
@@ -171,7 +171,41 @@ st.markdown("""
     [data-testid="stSidebar"] { display: none !important; }
     header, footer { visibility: hidden !important; }
 
-    /* 2. CARDS DE ENTRADA (CINZA ESCURO) */
+    /* 2. CENTRALIZAÇÃO E COR DO TECHNOBOLT */
+    .hero-container {
+        text-align: center;
+        width: 100%;
+        margin-bottom: 40px;
+    }
+    .hero-title-blue {
+        font-size: 42px; font-weight: 800;
+        color: #3b82f6 !important; /* AZUL TECHNOBOLT */
+        letter-spacing: -2px;
+        display: block;
+        text-align: center;
+    }
+
+    /* 3. REMOÇÃO TOTAL DE FUNDOS BRANCOS (FORMS E SUSPENSAS) */
+    /* Selectbox, Inputs, Textarea e seus containers internos */
+    div[data-baseweb="select"] > div, 
+    div[data-baseweb="input"] > div, 
+    div[data-baseweb="textarea"] > div,
+    [data-testid="stSelectbox"] div {
+        background-color: #262626 !important;
+        border: 1px solid #404040 !important;
+        color: #ffffff !important;
+    }
+
+    /* Lista suspensa aberta (Dropdown) */
+    div[data-baseweb="popover"] ul,
+    div[role="listbox"],
+    li[data-baseweb="typeahead-highlighted"],
+    li[role="option"] {
+        background-color: #262626 !important;
+        color: #ffffff !important;
+    }
+
+    /* 4. CARDS E UPLOADER DARK */
     .main-card {
         background-color: #1a1a1a !important; 
         border: 1px solid #333333; 
@@ -180,29 +214,15 @@ st.markdown("""
         margin-bottom: 25px;
     }
 
-    /* 3. WIDGETS DE INPUT E SELECT */
-    div[data-baseweb="select"] > div, div[data-baseweb="input"] > div, div[data-baseweb="textarea"] > div {
-        background-color: #262626 !important;
-        border: 1px solid #404040 !important;
-        color: #ffffff !important;
-    }
-
-    /* 4. CORREÇÃO DO BOTÃO "BROWSE FILES" (NÃO MAIS BRANCO) */
     [data-testid="stFileUploader"] {
         background-color: #1a1a1a !important;
         border: 1px dashed #404040 !important;
-        border-radius: 12px !important;
     }
-
+    
     [data-testid="stFileUploader"] button {
         background-color: #333333 !important;
         color: #ffffff !important;
         border: 1px solid #404040 !important;
-    }
-    
-    [data-testid="stFileUploader"] button:hover {
-        background-color: #3b82f6 !important;
-        border-color: #ffffff !important;
     }
 
     /* 5. CARD DE RESULTADO UNIFICADO */
@@ -210,34 +230,24 @@ st.markdown("""
         background: #0d0d0d !important; 
         border: 1px solid #333333; 
         border-radius: 20px;
-        padding: 35px; 
+        padding: 30px; 
         color: #ffffff !important;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-        margin-top: 20px;
     }
 
-    .result-title {
-        color: #3b82f6 !important; /* AZUL TECHNOBOLT */
-        font-weight: 800;
-        font-size: 28px;
-        margin-bottom: 15px;
-        border-bottom: 1px solid #333333;
-        padding-bottom: 15px;
-    }
-
-    .result-body {
-        line-height: 1.6;
-        font-size: 15px;
-        white-space: pre-wrap;
-    }
-
-    /* 6. BOTÕES GERAIS DO SISTEMA */
+    /* 6. BOTÕES GERAIS */
     .stButton > button {
         width: 100%; border-radius: 10px; height: 3.5em; font-weight: 700;
         background-color: #333333 !important; color: #ffffff !important; 
         border: 1px solid #404040 !important; transition: 0.3s;
     }
     .stButton > button:hover { background-color: #3b82f6 !important; border-color: #ffffff !important; }
+
+    /* Força fonte branca no mobile */
+    input, textarea, select {
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -247,8 +257,9 @@ if not st.session_state.logged_in:
     _, col_login, _ = st.columns([1, 1.4, 1])
     with col_login:
         st.markdown('<div class="main-card">', unsafe_allow_html=True)
-        st.markdown("<h1 class='hero-title'>TECHNOBOLT</h1>", unsafe_allow_html=True)
-        st.markdown("<p style='text-align:center; color:#64748b; margin-bottom:40px;'>LEGAL SYSTEM - INTELIGÊNCIA JURÍDICA ALTA</p>", unsafe_allow_html=True)
+        # TÍTULO CENTRALIZADO E AZUL AQUI
+        st.markdown('<div class="hero-container"><span class="hero-title-blue">Technobolt</span></div>', unsafe_allow_html=True)
+        st.markdown("<p style='text-align:center; color:#94a3b8; margin-bottom:40px;'>LEGAL HUB - JURIS INTELLIGENCE</p>", unsafe_allow_html=True)
         
         user_id = st.text_input("Operador", placeholder="Usuário")
         user_key = st.text_input("Chave", type="password", placeholder="Senha")
