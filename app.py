@@ -104,7 +104,6 @@ def call_technobolt_ai(prompt, attachments=None, system_context="default"):
     p = st.session_state.perfil_cliente
     dna_context = f"DNA SISTEMA: {p['nome_empresa']} | SETOR: {p['setor']} | TOM: {p['tom_voz']}\n\n"
 
-    # --- PROMPTS DE ELITE REINTEGRADOS (EXTENSOS) ---
     contexts = {
         "prazos": """Você é um Controller Jurídico de alto nível, especialista em prazos processuais e normas do CPC/15, CPP e CLT. Sua tarefa é analisar o texto da intimação fornecida. 
         Protocolo de Análise:
@@ -155,15 +154,6 @@ def call_technobolt_ai(prompt, attachments=None, system_context="default"):
             return response.text, model_name
         except: continue
     return "⚠️ Motores de IA Offline. Contate o suporte.", "OFFLINE"
-
-# --- 5. DESIGN SYSTEM (ESTÉTICA ELITE HUB) ---
-st.markdown("""
-<style>
-   Para criar esse visual de Soberania Digital, unificamos os formulários, as barras suspensas (selectbox) e os campos de texto com a cor #103b70, criando um contraste elegante sobre o fundo #080438.
-
-Aqui está o CSS (Seção 5) ajustado para que todos os componentes sigam essa paleta, mantendo a fonte branca e a leitura limpa:
-
-Python
 
 # --- 5. DESIGN SYSTEM (ESTÉTICA TECHNOBOLT LEGAL - DARK UNIFICADO) ---
 st.markdown("""
@@ -282,7 +272,7 @@ menu = [
     "📊 Legal Analytics"
 ]
 escolha = st.selectbox("Seletor de Módulo", menu, label_visibility="collapsed")
-st.markdown("<hr style='margin: 10px 0 35px 0; border: 0.5px solid #e2e8f0;'>", unsafe_allow_html=True)
+st.markdown("<hr style='margin: 10px 0 35px 0; border: 0.5px solid #103b70;'>", unsafe_allow_html=True)
 
 # --- 8. MÓDULOS OPERACIONAIS ---
 
