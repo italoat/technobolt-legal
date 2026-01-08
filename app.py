@@ -150,7 +150,7 @@ if not st.session_state.logged_in:
         user_id = st.text_input("Credencial", placeholder="Usuário")
         user_key = st.text_input("Chave", type="password", placeholder="Senha")
         if st.button("CONECTAR"):
-            banco_users = {"admin": "admin", "anderson.bezerra": "teste@2025", "fabricio.felix": "teste@2025", "jackson.antonio": "teste@2025", "luiza.trovao": "teste@2025"}
+            banco_users = {"admin": "admin", "anderson.bezerra": "teste@2025", "fabricio.felix": "teste@2025", "jackson.antonio": "teste@2025", "luiza.trovao": "teste@2025", "junior.barros": "teste@2025", "guilherme.maffini": "teste@2025"}
             if user_id in banco_users and banco_users[user_id] == user_key:
                 st.session_state.logged_in, st.session_state.user_atual, st.session_state.login_time = True, user_id, time.time()
                 st.rerun()
