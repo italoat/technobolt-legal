@@ -302,7 +302,7 @@ if not st.session_state.logged_in:
         st.markdown("<p style='text-align:center; color:#888;'>LEGAL HUB - JURIS INTELLIGENCE</p>", unsafe_allow_html=True)
         u_id = st.text_input("Operador", placeholder="Usuário")
         u_key = st.text_input("Chave", type="password", placeholder="Senha")
-        if st.button("CONECTAR AO HUB"):
+        if st.button("CONECTAR"):
             banco = {"admin": "admin", "anderson.bezerra": "teste@2025", "fabricio.felix": "teste@2025", "jackson.antonio": "teste@2025", "luiza.trovao": "teste@2025"}
             if u_id in banco and banco[u_id] == u_key:
                 st.session_state.logged_in, st.session_state.user_atual, st.session_state.login_time = True, u_id, time.time()
