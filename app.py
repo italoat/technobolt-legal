@@ -395,26 +395,26 @@ elif "📊 Legal Analytics" in escolha:
 if st.session_state.get('mostrar_resultado'):
     st.markdown("---")
     _, col_res, _ = st.columns([0.1, 11.8, 0.1])
+    
     with col_res:
-        # O container força o Streamlit a agrupar os elementos dentro do card
-        with st.container():
-            # Abertura do card e título
-            st.markdown(f"""
-                <div class="result-card-unificado">
-                    <div class="result-title">Technobolt - {st.session_state.titulo_resultado}</div>
-                    <div style="color: #ffffff; min-height: 50px;">
-            """, unsafe_allow_html=True)
-            
-            # Conteúdo da IA renderizado dinamicamente dentro das DIVs
-            st.markdown(st.session_state.resultado_ia)
-            
-            # Fechamento das DIVs
-            st.markdown("""
-                    </div>
-                </div>
-            """, unsafe_allow_html=True)
+        # 1. Preparamos o conteúdo: Título + Resposta da IA
+        # Usamos f-strings para montar o HTML de abertura e fechamento
+        html_abertura = f"""
+        <div class="result-card-unificado">
+            <div class="result-title">Technobolt - {st.session_state.titulo_resultado}</div>
+            <div style="color: #ffffff; line-height: 1.6; margin-top: 20px;">
+        """
         
-        # Botão de fechar posicionado abaixo do card
+        html_fechamento = """
+            </div>
+        </div>
+        """
+        
+        # 2. Exibimos TUDO em um único bloco de Markdown concatenado
+        # Isso garante que o Streamlit não quebre a hierarquia das DIVs
+        st.markdown(html_abertura + st.session_state.resultado_ia + html_fechamento, unsafe_allow_html=True)
+        
+        # 3. Botão de fechar (fora do card para evitar bugs de clique)
         st.write("")
         if st.button("✖️ LIMPAR E FECHAR RELATÓRIO"):
             st.session_state.mostrar_resultado = False
