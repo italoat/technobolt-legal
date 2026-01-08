@@ -9,7 +9,7 @@ from io import BytesIO
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 
-# --- 1. CONFIGURAÇÃO DE SEGURANÇA E PROTOCOLO (REAL ACESSÓRIOS STYLE) ---
+# --- 1. CONFIGURAÇÃO DE SEGURANÇA E PROTOCOLO ---
 st.set_page_config(
     page_title="TechnoBolt IA - Legal Hub",
     page_icon="⚖️",
@@ -37,7 +37,7 @@ for chave, valor in chaves_sessao.items():
     if chave not in st.session_state:
         st.session_state[chave] = valor
 
-# --- 3. SISTEMA DE AUDITORIA E LOGOUT (SOBERANIA DIGITAL) ---
+# --- 3. SISTEMA DE AUDITORIA E LOGOUT ---
 def enviar_notificacao_email(assunto, corpo):
     sg_key = os.environ.get("SENDGRID_API_KEY") 
     message = Mail(
@@ -153,14 +153,13 @@ def call_technobolt_ai(prompt, attachments=None, system_context="default"):
             response = model.generate_content(payload)
             return response.text, model_name
         except: continue
-    return "⚠️ Motores de IA Offline. Contate o suporte.", "OFFLINE"
+    return "⚠️ Motores de IA Offline.", "OFFLINE"
 
-# --- 5. DESIGN SYSTEM (ESTÉTICA TECHNOBOLT LEGAL - DARK UNIFICADO) ---
+# --- 5. DESIGN SYSTEM (DARK MODE ABSOLUTO) ---
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
     
-    /* 1. FUNDO GLOBAL PRETO ABSOLUTO */
     html, body, [data-testid="stAppViewContainer"], [data-testid="stHeader"] { 
         background-color: #000000 !important; 
         font-family: 'Inter', sans-serif !important; 
@@ -171,41 +170,45 @@ st.markdown("""
     [data-testid="stSidebar"] { display: none !important; }
     header, footer { visibility: hidden !important; }
 
-    /* 2. CENTRALIZAÇÃO E COR DO TECHNOBOLT */
-    .hero-container {
-        text-align: center;
-        width: 100%;
-        margin-bottom: 40px;
-    }
-    .hero-title-blue {
-        font-size: 42px; font-weight: 800;
-        color: #3b82f6 !important; /* AZUL TECHNOBOLT */
-        letter-spacing: -2px;
-        display: block;
-        text-align: center;
+    /* TITULO CENTRALIZADO AZUL */
+    .hero-container { text-align: center; width: 100%; margin-top: 20px; margin-bottom: 20px; }
+    .hero-title-blue { 
+        font-size: 50px; font-weight: 800; color: #3b82f6 !important; 
+        text-align: center; display: block; width: 100%;
     }
 
-    /* 3. REMOÇÃO TOTAL DE FUNDOS BRANCOS (FORMS E SUSPENSAS) */
-    /* Selectbox, Inputs, Textarea e seus containers internos */
+    /* REMOÇÃO DE FUNDOS BRANCOS EM INPUTS E SELECTS */
     div[data-baseweb="select"] > div, 
     div[data-baseweb="input"] > div, 
     div[data-baseweb="textarea"] > div,
-    [data-testid="stSelectbox"] div {
-        background-color: #262626 !important;
-        border: 1px solid #404040 !important;
+    [data-testid="stSelectbox"] div,
+    [data-testid="stTextArea"] div {
+        background-color: #1a1a1a !important;
+        border: 1px solid #333333 !important;
         color: #ffffff !important;
     }
 
-    /* Lista suspensa aberta (Dropdown) */
-    div[data-baseweb="popover"] ul,
-    div[role="listbox"],
-    li[data-baseweb="typeahead-highlighted"],
-    li[role="option"] {
-        background-color: #262626 !important;
+    div[role="listbox"], li[role="option"], div[data-baseweb="popover"] {
+        background-color: #1a1a1a !important;
         color: #ffffff !important;
     }
+    li[role="option"]:hover { background-color: #3b82f6 !important; }
 
-    /* 4. CARDS E UPLOADER DARK */
+    /* FILE UPLOADER DARK */
+    [data-testid="stFileUploader"] {
+        background-color: #1a1a1a !important;
+        border: 1px dashed #333333 !important;
+        border-radius: 15px;
+        padding: 10px;
+    }
+    [data-testid="stFileUploader"] button {
+        background-color: #333333 !important;
+        color: #ffffff !important;
+        border: 1px solid #444444 !important;
+        appearance: none;
+    }
+
+    /* CARDS PRINCIPAIS */
     .main-card {
         background-color: #1a1a1a !important; 
         border: 1px solid #333333; 
@@ -214,176 +217,133 @@ st.markdown("""
         margin-bottom: 25px;
     }
 
-    [data-testid="stFileUploader"] {
-        background-color: #1a1a1a !important;
-        border: 1px dashed #404040 !important;
-    }
-    
-    [data-testid="stFileUploader"] button {
-        background-color: #333333 !important;
-        color: #ffffff !important;
-        border: 1px solid #404040 !important;
-    }
-
-    /* 5. CARD DE RESULTADO UNIFICADO */
+    /* RESULTADO UNIFICADO */
     .result-card-unificado {
-        background: #0d0d0d !important; 
+        background: #0a0a0a !important; 
         border: 1px solid #333333; 
         border-radius: 20px;
-        padding: 30px; 
+        padding: 35px; 
+        margin-top: 20px;
         color: #ffffff !important;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+    }
+    .result-title {
+        color: #3b82f6 !important;
+        font-weight: 800;
+        font-size: 28px;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #333333;
+        padding-bottom: 15px;
     }
 
-    /* 6. BOTÕES GERAIS */
+    /* BOTÕES */
     .stButton > button {
-        width: 100%; border-radius: 10px; height: 3.5em; font-weight: 700;
-        background-color: #333333 !important; color: #ffffff !important; 
-        border: 1px solid #404040 !important; transition: 0.3s;
+        width: 100%; border-radius: 12px; height: 3.5em; font-weight: 700;
+        background-color: #1a1a1a !important; color: #ffffff !important; 
+        border: 1px solid #333333 !important;
     }
     .stButton > button:hover { background-color: #3b82f6 !important; border-color: #ffffff !important; }
 
-    /* Força fonte branca no mobile */
-    input, textarea, select {
-        color: #ffffff !important;
-        -webkit-text-fill-color: #ffffff !important;
-    }
+    input, textarea { color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; }
 </style>
 """, unsafe_allow_html=True)
 
-# --- 6. TELA DE LOGIN (USUÁRIOS ORIGINAIS) ---
+# --- 6. TELA DE LOGIN ---
 if not st.session_state.logged_in:
-    st.markdown("<div style='height: 12vh;'></div>", unsafe_allow_html=True)
-    _, col_login, _ = st.columns([1, 1.4, 1])
+    st.markdown("<div style='height: 15vh;'></div>", unsafe_allow_html=True)
+    _, col_login, _ = st.columns([1, 1.5, 1])
     with col_login:
-        st.markdown('<div class="main-card">', unsafe_allow_html=True)
-        # TÍTULO CENTRALIZADO E AZUL AQUI
         st.markdown('<div class="hero-container"><span class="hero-title-blue">Technobolt</span></div>', unsafe_allow_html=True)
-        st.markdown("<p style='text-align:center; color:#94a3b8; margin-bottom:40px;'>LEGAL HUB - JURIS INTELLIGENCE</p>", unsafe_allow_html=True)
-        
-        user_id = st.text_input("Operador", placeholder="Usuário")
-        user_key = st.text_input("Chave", type="password", placeholder="Senha")
-
+        st.markdown("<p style='text-align:center; color:#888;'>LEGAL HUB - JURIS INTELLIGENCE</p>", unsafe_allow_html=True)
+        u_id = st.text_input("Operador", placeholder="Usuário")
+        u_key = st.text_input("Chave", type="password", placeholder="Senha")
         if st.button("CONECTAR AO HUB"):
-            banco_users = {
-                "admin": "admin",
-                "anderson.bezerra": "teste@2025", 
-                "fabricio.felix": "teste@2025", 
-                "jackson.antonio": "teste@2025", 
-                "luiza.trovao": "teste@2025"
-            }
-            if user_id in banco_users and banco_users[user_id] == user_key:
-                st.session_state.logged_in = True
-                st.session_state.user_atual = user_id
-                st.session_state.login_time = time.time()
-                enviar_notificacao_email("Login TechnoBolt Legal", f"Operador {user_id} acessou o sistema.")
+            banco = {"admin": "admin", "anderson.bezerra": "teste@2025", "fabricio.felix": "teste@2025", "jackson.antonio": "teste@2025", "luiza.trovao": "teste@2025"}
+            if u_id in banco and banco[u_id] == u_key:
+                st.session_state.logged_in, st.session_state.user_atual, st.session_state.login_time = True, u_id, time.time()
+                enviar_notificacao_email("Login Hub", f"Advogado {u_id} acessou.")
                 st.rerun()
     st.stop()
 
-# --- 7. CABEÇALHO E NAVEGAÇÃO ---
-st.markdown("<div style='height:15px;'></div>", unsafe_allow_html=True)
-h1, h2 = st.columns([4, 1.2])
-with h1: st.markdown(f"**ADVOGADO:** <span class='status-badge'>{st.session_state.user_atual.upper()}</span>", unsafe_allow_html=True)
-with h2: 
-    if st.button("🚪 Sair do Hub"): protocol_logout()
+# --- 7. CABEÇALHO ---
+st.markdown('<div class="hero-container"><span class="hero-title-blue">Technobolt</span></div>', unsafe_allow_html=True)
+c1, c2 = st.columns([4, 1])
+with c1: st.write(f"💼 Operador: **{st.session_state.user_atual.upper()}**")
+with c2: 
+    if st.button("🚪 Sair"): protocol_logout()
 
-menu = [
-    "🏠 Dashboard de Comando",
-    "📅 Auditor de Prazos",
-    "🔍 Analisador de Petições",
-    "⚖️ Dossiê de Jurisprudência",
-    "📝 Revisor de Contratos (Massa)",
-    "📊 Legal Analytics"
-]
+menu = ["🏠 Dashboard", "📅 Auditor de Prazos", "🔍 Analisador de Petições", "⚖️ Jurisprudência", "📝 Revisor de Contratos", "📊 Legal Analytics"]
 escolha = st.selectbox("Seletor de Módulo", menu, label_visibility="collapsed")
-st.markdown("<hr style='margin: 10px 0 35px 0; border: 0.5px solid #103b70;'>", unsafe_allow_html=True)
+st.markdown("<hr style='border-color: #333; margin-bottom:30px;'>", unsafe_allow_html=True)
 
 # --- 8. MÓDULOS OPERACIONAIS ---
 
 if "🏠 Dashboard" in escolha:
-    st.markdown('<div class="main-card"><h1>Legal Command Center</h1><p>MONITORIA DE RISCO E EFICIÊNCIA PROCESSUAL</p></div>', unsafe_allow_html=True)
+    st.markdown('<div class="main-card"><h2>Command Center</h2><p>MONITORIA DE RISCO E EFICIÊNCIA</p></div>', unsafe_allow_html=True)
     c1, c2, c3 = st.columns(3)
-    c1.metric("Failover Status", "Active", "Redundância 5/5")
+    c1.metric("Failover Status", "Active", "5/5")
     c2.metric("Sessão", st.session_state.user_atual.split('.')[0].upper(), "Protegida")
-    c3.metric("Win Rate", "84%", "Consolidado Jurimetria")
+    c3.metric("Win Rate", "84%", "Consolidado")
 
 elif "📅 Auditor de Prazos" in escolha:
-    st.markdown('<div class="main-card"><h2>📅 Auditor de Prazos e Intimações</h2><p>Identificação de atos e contagem automática em dias úteis.</p></div>', unsafe_allow_html=True)
-    txt = st.text_area("Texto da Publicação ou Intimação:", height=200)
-    if st.button("CALCULAR PRAZO FATAL"):
-        registrar_evento("Auditoria Prazos")
-        with st.spinner("Analisando publicação..."):
-            res, _ = call_technobolt_ai(f"Analise esta publicação:\n{txt}", system_context="prazos")
-            st.session_state.update({'titulo_resultado': "Relatório de Prazo Processual", 'resultado_ia': res, 'mostrar_resultado': True})
+    st.markdown('<div class="main-card"><h2>Auditor de Prazos</h2><p>Contagem automática em dias úteis (CPC/15).</p></div>', unsafe_allow_html=True)
+    txt = st.text_area("Texto da Publicação:", height=200)
+    if st.button("CALCULAR PRAZO FATAL") and txt:
+        registrar_evento("Prazos")
+        with st.spinner("Analisando..."):
+            res, _ = call_technobolt_ai(txt, system_context="prazos")
+            st.session_state.update({'titulo_resultado': "Relatório de Prazo", 'resultado_ia': res, 'mostrar_resultado': True})
             st.rerun()
 
 elif "🔍 Analisador de Petições" in escolha:
-    st.markdown('<div class="main-card"><h2>🔍 Analisador de Petições e Provas</h2><p>Busca de contradições fáticas e validação de argumentos.</p></div>', unsafe_allow_html=True)
-    f1 = st.file_uploader("Suba a Petição (PDF/DOCX)", type=['pdf', 'docx'])
-    f2 = st.file_uploader("Suba as Provas (PDF)", type=['pdf'])
+    st.markdown('<div class="main-card"><h2>Analisador de Petições</h2><p>Busca de contradições fáticas e vulnerabilidades.</p></div>', unsafe_allow_html=True)
+    f1 = st.file_uploader("Petição (PDF/DOCX)", type=['pdf', 'docx'])
+    f2 = st.file_uploader("Provas (PDF)", type=['pdf'])
     if f1 and st.button("EXECUTAR RAIO-X"):
         registrar_evento("Análise Tática")
         with st.spinner("Cruzando dados..."):
-            t1, t2 = preparar_anexo_ia(f1), preparar_anexo_ia(f2) if f2 else "Sem provas anexadas."
-            res, _ = call_technobolt_ai(f"PETIÇÃO:\n{t1}\n\nPROVAS:\n{t2}", system_context="analisador")
+            t1, t2 = preparar_anexo_ia(f1), preparar_anexo_ia(f2) if f2 else "Sem provas."
+            res, _ = call_technobolt_ai(f"Petição: {t1}\nProvas: {t2}", system_context="analisador")
             st.session_state.update({'titulo_resultado': "Dossiê de Vulnerabilidades", 'resultado_ia': res, 'mostrar_resultado': True})
             st.rerun()
 
-elif "⚖️ Dossiê de Jurisprudência" in escolha:
-    st.markdown('<div class="main-card"><h2>⚖️ Dossiê de Jurisprudência Semântica</h2><p>Busca de precedentes e estratégia baseada no magistrado.</p></div>', unsafe_allow_html=True)
+elif "⚖️ Jurisprudência" in escolha:
+    st.markdown('<div class="main-card"><h2>Jurisprudência Semântica</h2><p>Estratégia baseada em precedentes e julgador.</p></div>', unsafe_allow_html=True)
     caso = st.text_area("Descreva o caso concreto:")
-    juiz = st.text_input("Nome do Juiz ou Relator (Opcional):")
-    if st.button("GERAR ESTRATÉGIA"):
-        registrar_evento("Busca Jurisprudencial")
-        res, _ = call_technobolt_ai(f"Caso: {caso}\nMagistrado: {juiz}", system_context="jurisprudencia")
+    juiz = st.text_input("Nome do Magistrado (Opcional):")
+    if st.button("GERAR ESTRATÉGIA") and caso:
+        registrar_evento("Jurisprudência")
+        res, _ = call_technobolt_ai(f"Caso: {caso}\nJuiz: {juiz}", system_context="jurisprudencia")
         st.session_state.update({'titulo_resultado': "Estratégia de Precedentes", 'resultado_ia': res, 'mostrar_resultado': True})
         st.rerun()
 
 elif "📝 Revisor de Contratos" in escolha:
-    st.markdown('<div class="main-card"><h2>📝 Revisor de Contratos (Massa)</h2><p>Auditoria simultânea de conformidade e riscos.</p></div>', unsafe_allow_html=True)
+    st.markdown('<div class="main-card"><h2>Revisor de Contratos</h2><p>Auditoria simultânea de riscos e compliance.</p></div>', unsafe_allow_html=True)
     files = st.file_uploader("Upload de Contratos", accept_multiple_files=True, type=['pdf', 'docx'])
     if files and st.button("INICIAR AUDITORIA"):
-        registrar_evento("Auditoria Contratos")
-        results, bar = [], st.progress(0)
+        registrar_evento("Contratos")
+        res_list, bar = [], st.progress(0)
         for i, f in enumerate(files):
-            txt = preparar_anexo_ia(f)
-            res, _ = call_technobolt_ai(f"Contrato: {f.name}\n{txt}", system_context="contratos")
-            results.append(f"### Arquivo: {f.name}\n{res.strip()}")
+            r, _ = call_technobolt_ai(preparar_anexo_ia(f), system_context="contratos")
+            res_list.append(f"### Arquivo: {f.name}\n{r}")
             bar.progress((i + 1) / len(files))
-        st.session_state.update({'titulo_resultado': "Relatório de Risco Contratual", 'resultado_ia': "\n\n---\n\n".join(results), 'mostrar_resultado': True})
+        st.session_state.update({'titulo_resultado': "Auditoria de Compliance", 'resultado_ia': "\n\n---\n\n".join(res_list), 'mostrar_resultado': True})
         st.rerun()
 
-elif "📊 Legal Analytics" in escolha:
-    st.markdown('<div class="main-card"><h2>📊 Legal Analytics</h2><p>Jurimetria e estatísticas estratégicas.</p></div>', unsafe_allow_html=True)
-    dados = st.text_area("Cole os dados brutos ou tabela de processos:")
-    if st.button("GERAR INSIGHTS"):
-        registrar_evento("Analytics Jurídico")
-        res, _ = call_technobolt_ai(dados, system_context="analytics")
-        st.session_state.update({'titulo_resultado': "Análise Jurimetrista", 'resultado_ia': res, 'mostrar_resultado': True})
-        st.rerun()
-
-# --- 9. RESULTADO CENTRALIZADO (ESTRUTURA UNIFICADA) ---
+# --- 9. RESULTADO UNIFICADO ---
 if st.session_state.get('mostrar_resultado'):
     st.markdown("---")
-    _, col_central, _ = st.columns([1, 10, 1])
-    with col_central:
-        # Abre o card, insere o título Technobolt e o corpo da resposta no mesmo bloco
+    _, col_res, _ = st.columns([0.1, 11.8, 0.1])
+    with col_res:
         st.markdown(f"""
             <div class="result-card-unificado">
-                <div class="result-title">
-                    Technobolt - {st.session_state.titulo_resultado}
-                </div>
-                <div class="result-body">
+                <div class="result-title">Technobolt - {st.session_state.titulo_resultado}</div>
+                <div style="white-space: pre-wrap; line-height: 1.6;">
         """, unsafe_allow_html=True)
-        
-        # O corpo da resposta da IA entra aqui como Markdown nativo
         st.markdown(st.session_state.resultado_ia)
-        
-        # Fecha as divs de corpo e card
         st.markdown('</div></div>', unsafe_allow_html=True)
-        
-        st.write("")
-        if st.button("✖️ LIMPAR E FECHAR RESULTADO"):
+        if st.button("✖️ LIMPAR E FECHAR"):
             st.session_state.mostrar_resultado = False
             st.rerun()
-st.caption(f"TechnoBolt Solutions © 2026 | Legal Hub v2.0 | Operador: {st.session_state.user_atual.upper()}")
+
+st.caption(f"TechnoBolt Solutions © 2026 | Operador: {st.session_state.user_atual.upper()}")
