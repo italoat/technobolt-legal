@@ -112,8 +112,13 @@ st.markdown("""
     }
     .result-card-dark {
         background: #1e293b !important; border: 1px solid #334155; border-radius: 24px;
-        padding: 45px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2); margin-bottom: 30px;
+        padding: 30px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2); margin-top: 10px;
         color: #f1f5f9 !important;
+    }
+    .result-card-dark table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+    .result-card-dark th, .result-card-dark td { border: 1px solid #334155; padding: 8px; text-align: left; }
+    /* Remove espaços vazios gerados pelo markdown dentro de divs HTML */
+    .result-card-dark p { margin-bottom: 0px !important;
     }
     .hero-title {
         font-size: 42px; font-weight: 800; text-align: center;
@@ -209,14 +214,22 @@ elif "Revisor de Contratos" in escolha:
     st.markdown('<div class="main-card"><h2>📝 Revisor de Contratos (Massa)</h2><p>Auditoria simultânea de conformidade e riscos.</p></div>', unsafe_allow_html=True)
     files = st.file_uploader("Upload de Contratos", accept_multiple_files=True, type=['pdf', 'docx'])
     if files and st.button("INICIAR AUDITORIA"):
-        registrar_evento("Auditoria Contratos")
-        results, bar = [], st.progress(0)
-        for i, f in enumerate(files):
-            res, _ = call_technobolt_ai(preparar_anexo_ia(f), system_context="contratos")
-            results.append(f"### Arquivo: {f.name}\n{res}\n---")
-            bar.progress((i + 1) / len(files))
-        st.session_state.update({'titulo_resultado': "Relatório de Risco Contratual", 'resultado_ia': "\n".join(results), 'mostrar_resultado': True})
-        st.rerun()
+    registrar_evento("Auditoria Contratos")
+    results, bar = [], st.progress(0)
+    for i, f in enumerate(files):
+        txt = preparar_anexo_ia(f)
+        res, _ = call_technobolt_ai(txt, system_context="contracts")
+        # .strip() remove espaços extras no início e fim de cada resposta
+        results.append(f"### Arquivo: {f.name}\n{res.strip()}\n")
+        bar.progress((i + 1) / len(files))
+    
+    # \n\n--- garante uma separação visual limpa sem pular 10 linhas
+    st.session_state.update({
+        'titulo_resultado': "Relatório de Risco Contratual", 
+        'resultado_ia': "\n\n---\n\n".join(results), 
+        'mostrar_resultado': True
+    })
+    st.rerun()
 
 elif "Legal Analytics" in escolha:
     st.markdown('<div class="main-card"><h2>📊 Legal Analytics</h2><p>Jurimetria e estatísticas estratégicas.</p></div>', unsafe_allow_html=True)
@@ -232,16 +245,24 @@ if st.session_state.get('mostrar_resultado'):
     st.markdown("---")
     _, col_central, _ = st.columns([1, 8, 1])
     with col_central:
+        # Iniciamos a moldura do card
         st.markdown(f"""
             <div class="result-card-dark">
-                <h2 style="color: #60a5fa; margin-bottom: 20px;">{st.session_state.titulo_resultado}</h2>
-                <div style="white-space: pre-wrap; line-height: 1.6; font-size: 15px; color: #cbd5e1;">
-                    {st.session_state.resultado_ia}
-                </div>
+                <h2 style="color: #60a5fa; margin-bottom: 15px; border-bottom: 1px solid #334155; padding-bottom: 10px;">
+                    {st.session_state.titulo_resultado}
+                </h2>
             </div>
         """, unsafe_allow_html=True)
+        
+        # Usamos um container interno para renderizar o conteúdo da IA sem quebrar o layout
+        with st.container():
+            st.markdown(f"""
+                <div style="background: #0f172a; padding: 20px; border-radius: 12px; color: #cbd5e1; font-size: 15px;">
+                    {st.session_state.resultado_ia.strip()}
+                </div>
+            """, unsafe_allow_html=True)
+            
         if st.button("✖️ LIMPAR E FECHAR"):
             st.session_state.mostrar_resultado = False
             st.rerun()
-
 st.caption(f"TechnoBolt Legal © 2026 | Juris Intel v2.0 | Operador: {st.session_state.user_atual.upper()}")
