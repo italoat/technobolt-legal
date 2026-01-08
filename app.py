@@ -383,32 +383,29 @@ elif "📊 Legal Analytics" in escolha:
 # --- 9. RESULTADO UNIFICADO ---
 if st.session_state.get('mostrar_resultado'):
     st.markdown("---")
-    # Colunas para centralizar o card na tela
-    _, col_central, _ = st.columns([0.1, 11.8, 0.1])
-    
-    with col_central:
-        # Abrimos a moldura externa do card
-        st.markdown(f"""
-            <div class="result-card-unificado">
-                <div class="result-title">
-                    Technobolt - {st.session_state.titulo_resultado}
+    _, col_res, _ = st.columns([0.1, 11.8, 0.1])
+    with col_res:
+        # Criamos o container visual
+        with st.container():
+            # Injetamos o CSS de abertura do card e o título
+            st.markdown(f"""
+                <div class="result-card-unificado">
+                    <div class="result-title">Technobolt - {st.session_state.titulo_resultado}</div>
+                    <div style="color: #ffffff; line-height: 1.6;">
+            """, unsafe_allow_html=True)
+            
+            # Renderizamos o conteúdo da IA aqui dentro
+            st.markdown(st.session_state.resultado_ia)
+            
+            # Fechamos as tags HTML
+            st.markdown("""
+                    </div>
                 </div>
-                <div style="padding-top: 10px;">
-        """, unsafe_allow_html=True)
+            """, unsafe_allow_html=True)
         
-        # O segredo: st.markdown() dentro do bloco 'with' garante que o 
-        # conteúdo da IA seja injetado antes de fecharmos a div final.
-        st.markdown(st.session_state.resultado_ia)
-        
-        # Fechamos as tags de layout
-        st.markdown("""
-                </div>
-            </div>
-        """, unsafe_allow_html=True)
-        
-        # Espaçamento e Botão de Ação
+        # Botão de fechar fora do card para clareza
         st.write("")
-        if st.button("✖️ LIMPAR E FECHAR RELATÓRIO"):
+        if st.button("✖️ FECHAR RELATÓRIO"):
             st.session_state.mostrar_resultado = False
             st.rerun()
 
