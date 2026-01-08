@@ -211,6 +211,7 @@ st.markdown("""
         border-radius: 24px;
         padding: 40px; 
         color: #f1f5f9 !important;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     }
 
     .result-card-dark table { width: 100%; border-collapse: collapse; margin-top: 20px; color: #ffffff; }
@@ -226,7 +227,7 @@ st.markdown("""
     .stButton > button {
         width: 100%; border-radius: 14px; height: 3.8em; font-weight: 700;
         background: #1e40af !important; color: white !important; border: none !important;
-        transition: 0.4s;
+        transition: 0.4s; text-transform: uppercase;
     }
     .stButton > button:hover { background: #3b82f6 !important; transform: translateY(-2px); }
 
