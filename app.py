@@ -250,24 +250,26 @@ st.markdown("""
     }
 
     /* 5. CARD DE RESULTADO UNIFICADO */
-    .result-card-unificado {
-        background: #0d0d0d !important; 
-        border: 1px solid #333333; 
+   .result-card-unificado {
+        background-color: #1a1a1a !important;
+        border: 1px solid #333333;
         border-radius: 20px;
-        padding: 35px; 
+        padding: 35px;
+        margin-top: 20px;
         color: #ffffff !important;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+        width: 100%;
+        display: block;
+        overflow: visible; /* Permite que o card cresça com o texto */
     }
-
+    
     .result-title {
         color: #3b82f6 !important;
         font-weight: 800;
         font-size: 28px;
-        margin-bottom: 15px;
+        margin-bottom: 20px;
         border-bottom: 1px solid #333333;
         padding-bottom: 15px;
     }
-
     /* 6. BOTÕES GERAIS */
     .stButton > button {
         width: 100%; border-radius: 10px; height: 3.5em; font-weight: 700;
