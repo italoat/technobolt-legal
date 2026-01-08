@@ -170,7 +170,18 @@ st.markdown("""
     h1, h2, h3, h4, p, label, span, div, .stMarkdown { color: #ffffff !important; }
     [data-testid="stSidebar"] { display: none !important; }
     header, footer { visibility: hidden !important; }
-
+    .login-header {
+        text-align: center;
+        width: 100%;
+        margin-bottom: 40px;
+    }
+    .login-logo-blue {
+        font-size: 52px; font-weight: 800;
+        color: #3b82f6 !important; 
+        letter-spacing: -2px;
+        display: block;
+    }
+    
     /* 2. BARRA DE SERVIÇOS (SELECTBOX) - REFINAMENTO TOTAL */
     /* Fundo da caixa fechada */
     div[data-baseweb="select"] > div {
@@ -285,7 +296,7 @@ if not st.session_state.logged_in:
     st.markdown("<div style='height: 15vh;'></div>", unsafe_allow_html=True)
     _, col_login, _ = st.columns([1, 1.5, 1])
     with col_login:
-        st.markdown('<div class="hero-container"><span class="hero-title-blue">Technobolt</span></div>', unsafe_allow_html=True)
+        st.markdown('<div class="login-header"><span class="login-logo-blue">Technobolt</span></div>', unsafe_allow_html=True)
         st.markdown("<p style='text-align:center; color:#888;'>LEGAL HUB - JURIS INTELLIGENCE</p>", unsafe_allow_html=True)
         u_id = st.text_input("Operador", placeholder="Usuário")
         u_key = st.text_input("Chave", type="password", placeholder="Senha")
