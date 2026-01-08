@@ -372,6 +372,13 @@ elif "📝 Revisor de Contratos" in escolha:
             bar.progress((i + 1) / len(files))
         st.session_state.update({'titulo_resultado': "Auditoria de Compliance", 'resultado_ia': "\n\n---\n\n".join(res_list), 'mostrar_resultado': True})
         st.rerun()
+elif "📊 Legal Analytics" in escolha:
+    st.markdown('<div class="main-card"><h2>Legal Analytics</h2><p>Jurimetria e estatísticas estratégicas.</p></div>', unsafe_allow_html=True)
+    dados = st.text_area("Cole os dados ou tabela de processos:")
+    if st.button("GERAR INSIGHTS"):
+        registrar_evento("Analytics")
+        res = call_technobolt_ai(dados, system_context="analytics")
+        st.session_state.update({'titulo_resultado': "Análise Jurimetrista", 'resultado_ia': res, 'mostrar_resultado': True}); st.rerun()
 
 # --- 9. RESULTADO UNIFICADO ---
 if st.session_state.get('mostrar_resultado'):
