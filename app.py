@@ -160,22 +160,18 @@ st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
     
-    /* 1. FUNDO GLOBAL PRETO E FONTES BRANCAS */
+    /* 1. FUNDO GLOBAL PRETO */
     html, body, [data-testid="stAppViewContainer"], [data-testid="stHeader"] { 
         background-color: #000000 !important; 
         font-family: 'Inter', sans-serif !important; 
         color: #ffffff !important;
     }
 
-    /* Forçar cor branca em todos os textos, labels e markdown */
-    h1, h2, h3, h4, p, label, span, div, .stMarkdown { 
-        color: #ffffff !important; 
-    }
-    
+    h1, h2, h3, h4, p, label, span, div, .stMarkdown { color: #ffffff !important; }
     [data-testid="stSidebar"] { display: none !important; }
     header, footer { visibility: hidden !important; }
 
-    /* 2. CARDS PRINCIPAIS E CONTAINERS EM CINZA ESCURO */
+    /* 2. CARDS DE ENTRADA (CINZA ESCURO) */
     .main-card {
         background-color: #1a1a1a !important; 
         border: 1px solid #333333; 
@@ -184,104 +180,64 @@ st.markdown("""
         margin-bottom: 25px;
     }
 
-    /* 3. WIDGETS (SELECTBOX, INPUTS, TEXTAREA) EM CINZA */
-    div[data-baseweb="select"] > div, 
-    div[data-baseweb="input"] > div, 
-    div[data-baseweb="textarea"] > div {
+    /* 3. WIDGETS DE INPUT E SELECT */
+    div[data-baseweb="select"] > div, div[data-baseweb="input"] > div, div[data-baseweb="textarea"] > div {
         background-color: #262626 !important;
         border: 1px solid #404040 !important;
-        border-radius: 10px !important;
         color: #ffffff !important;
     }
 
-    /* Cor do texto ao digitar */
-    input, textarea {
-        color: #ffffff !important;
-        -webkit-text-fill-color: #ffffff !important;
-    }
-
-    /* Menu de opções (dropdown) do selectbox */
-    ul[role="listbox"] {
-        background-color: #262626 !important;
-        border: 1px solid #404040 !important;
-    }
-    li[role="option"] {
-        background-color: #262626 !important;
-        color: #ffffff !important;
-    }
-    li[role="option"]:hover {
-        background-color: #404040 !important;
-    }
-
-    /* 4. FILE UPLOADER EM CINZA COM TEXTO BRANCO */
+    /* 4. CORREÇÃO DO BOTÃO "BROWSE FILES" (NÃO MAIS BRANCO) */
     [data-testid="stFileUploader"] {
         background-color: #1a1a1a !important;
         border: 1px dashed #404040 !important;
         border-radius: 12px !important;
-        padding: 15px;
-    }
-    
-    /* Remover o fundo azul do botão de upload e ícone */
-    [data-testid="stFileUploader"] section {
-        background-color: #262626 !important;
-        color: #ffffff !important;
-    }
-    
-    /* Ajuste de cor de textos pequenos de ajuda do uploader */
-    small {
-        color: #cccccc !important;
     }
 
-    /* 5. CARD DE RESULTADO (CINZA MUITO ESCURO) */
-    .result-card-dark {
+    [data-testid="stFileUploader"] button {
+        background-color: #333333 !important;
+        color: #ffffff !important;
+        border: 1px solid #404040 !important;
+    }
+    
+    [data-testid="stFileUploader"] button:hover {
+        background-color: #3b82f6 !important;
+        border-color: #ffffff !important;
+    }
+
+    /* 5. CARD DE RESULTADO UNIFICADO */
+    .result-card-unificado {
         background: #0d0d0d !important; 
         border: 1px solid #333333; 
         border-radius: 20px;
         padding: 35px; 
         color: #ffffff !important;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+        margin-top: 20px;
     }
 
-    /* Tabelas no resultado */
-    .result-card-dark table { width: 100%; border-collapse: collapse; color: #ffffff; }
-    .result-card-dark th, .result-card-dark td { 
-        border: 1px solid #333333; 
-        padding: 10px; 
-        background: #1a1a1a; 
+    .result-title {
+        color: #3b82f6 !important; /* AZUL TECHNOBOLT */
+        font-weight: 800;
+        font-size: 28px;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #333333;
+        padding-bottom: 15px;
     }
 
-    /* 6. BOTÕES (CINZA MÉDIO COM HOVER CLARO) */
+    .result-body {
+        line-height: 1.6;
+        font-size: 15px;
+        white-space: pre-wrap;
+    }
+
+    /* 6. BOTÕES GERAIS DO SISTEMA */
     .stButton > button {
-        width: 100%; 
-        border-radius: 10px; 
-        height: 3.5em; 
-        font-weight: 700;
-        background-color: #333333 !important; 
-        color: #ffffff !important; 
-        border: 1px solid #404040 !important;
-        transition: 0.3s;
+        width: 100%; border-radius: 10px; height: 3.5em; font-weight: 700;
+        background-color: #333333 !important; color: #ffffff !important; 
+        border: 1px solid #404040 !important; transition: 0.3s;
     }
-    .stButton > button:hover { 
-        background-color: #4d4d4d !important; 
-        border-color: #ffffff !important;
-    }
-
-    /* 7. BADGES DE STATUS */
-    .status-badge {
-        padding: 5px 15px; 
-        border-radius: 50px; 
-        background: #262626; 
-        color: #ffffff; 
-        font-size: 12px; 
-        border: 1px solid #404040;
-    }
-    
-    /* Estilização da linha separadora */
-    hr {
-        border: 0;
-        border-top: 1px solid #333333 !important;
-        margin: 25px 0 !important;
-    }
+    .stButton > button:hover { background-color: #3b82f6 !important; border-color: #ffffff !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -395,17 +351,28 @@ elif "📊 Legal Analytics" in escolha:
         st.session_state.update({'titulo_resultado': "Análise Jurimetrista", 'resultado_ia': res, 'mostrar_resultado': True})
         st.rerun()
 
-# --- 9. RESULTADO (CARD ESCURO SEM ERROS) ---
+# --- 9. RESULTADO CENTRALIZADO (ESTRUTURA UNIFICADA) ---
 if st.session_state.get('mostrar_resultado'):
     st.markdown("---")
-    _, col_central, _ = st.columns([1, 8, 1])
+    _, col_central, _ = st.columns([1, 10, 1])
     with col_central:
-        st.markdown(f'<div class="result-card-dark"><h2 style="color: #60a5fa; margin-bottom: 20px; border-bottom: 1px solid #334155; padding-bottom: 10px;">{st.session_state.titulo_resultado}</h2>', unsafe_allow_html=True)
-        st.markdown(st.session_state.resultado_ia)
-        st.markdown('</div>', unsafe_allow_html=True)
+        # Abre o card, insere o título Technobolt e o corpo da resposta no mesmo bloco
+        st.markdown(f"""
+            <div class="result-card-unificado">
+                <div class="result-title">
+                    Technobolt - {st.session_state.titulo_resultado}
+                </div>
+                <div class="result-body">
+        """, unsafe_allow_html=True)
         
-        if st.button("✖️ LIMPAR E FECHAR"):
+        # O corpo da resposta da IA entra aqui como Markdown nativo
+        st.markdown(st.session_state.resultado_ia)
+        
+        # Fecha as divs de corpo e card
+        st.markdown('</div></div>', unsafe_allow_html=True)
+        
+        st.write("")
+        if st.button("✖️ LIMPAR E FECHAR RESULTADO"):
             st.session_state.mostrar_resultado = False
             st.rerun()
-
 st.caption(f"TechnoBolt Solutions © 2026 | Legal Hub v2.0 | Operador: {st.session_state.user_atual.upper()}")
