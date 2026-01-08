@@ -376,16 +376,32 @@ elif "📝 Revisor de Contratos" in escolha:
 # --- 9. RESULTADO UNIFICADO ---
 if st.session_state.get('mostrar_resultado'):
     st.markdown("---")
-    _, col_res, _ = st.columns([0.1, 11.8, 0.1])
-    with col_res:
+    # Colunas para centralizar o card na tela
+    _, col_central, _ = st.columns([0.1, 11.8, 0.1])
+    
+    with col_central:
+        # Abrimos a moldura externa do card
         st.markdown(f"""
             <div class="result-card-unificado">
-                <div class="result-title">Technobolt - {st.session_state.titulo_resultado}</div>
-                <div style="white-space: pre-wrap; line-height: 1.6;">
+                <div class="result-title">
+                    Technobolt - {st.session_state.titulo_resultado}
+                </div>
+                <div style="padding-top: 10px;">
         """, unsafe_allow_html=True)
+        
+        # O segredo: st.markdown() dentro do bloco 'with' garante que o 
+        # conteúdo da IA seja injetado antes de fecharmos a div final.
         st.markdown(st.session_state.resultado_ia)
-        st.markdown('</div></div>', unsafe_allow_html=True)
-        if st.button("✖️ LIMPAR E FECHAR"):
+        
+        # Fechamos as tags de layout
+        st.markdown("""
+                </div>
+            </div>
+        """, unsafe_allow_html=True)
+        
+        # Espaçamento e Botão de Ação
+        st.write("")
+        if st.button("✖️ LIMPAR E FECHAR RELATÓRIO"):
             st.session_state.mostrar_resultado = False
             st.rerun()
 
