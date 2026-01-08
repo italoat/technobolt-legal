@@ -214,8 +214,8 @@ elif "Revisor de Contratos" in escolha:
     st.markdown('<div class="main-card"><h2>📝 Revisor de Contratos (Massa)</h2><p>Auditoria simultânea de conformidade e riscos.</p></div>', unsafe_allow_html=True)
     files = st.file_uploader("Upload de Contratos", accept_multiple_files=True, type=['pdf', 'docx'])
     if files and st.button("INICIAR AUDITORIA"):
-    registrar_evento("Auditoria Contratos")
-    results, bar = [], st.progress(0)
+        registrar_evento("Auditoria Contratos")
+        results, bar = [], st.progress(0)
     for i, f in enumerate(files):
         txt = preparar_anexo_ia(f)
         res, _ = call_technobolt_ai(txt, system_context="contracts")
